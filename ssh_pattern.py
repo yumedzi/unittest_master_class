@@ -1,10 +1,14 @@
 import re
 import sys
+from dataclasses import dataclass
 
 from main import Software, emulate_long_running, logger, set_logger
 
 
+@dataclass
 class SSHClient(Software):
+    emulated_delay: int = 0
+
     def get_type(self):
         return "SSH Client"
 

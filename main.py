@@ -4,7 +4,7 @@
 # it is a subclass of Software which has some abstract methods required to be implemented.
 
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from os.path import expanduser
 from abc import ABC, abstractmethod
 from subprocess import check_output, STDOUT
@@ -65,7 +65,7 @@ class Software(ABC):
 
     """
 
-    emulated_delay: int = 0
+    emulated_delay: int = field(default=0, init=False)
 
     def run_cmd(self, cmd: str, encoding: str = "utf-8", delay=0) -> str:
         # Emulating delay
