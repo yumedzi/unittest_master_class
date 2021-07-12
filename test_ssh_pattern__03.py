@@ -1,4 +1,4 @@
-# Emulating long running commands
+# Adding setUpClass and emulating long running commands
 
 import unittest
 from unittest.mock import MagicMock
@@ -10,21 +10,26 @@ from main import Software
 class SSHPatternTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        print("!!!! Running setUpClass")
         ssh = SSHClient(emulated_delay=3)
         cls.result = ssh.discover()
 
+    @classmethod
+    def tearDownClass(self):
+        print("!!!! Running tearDownClass / just for example")
+
     def test_01_normal_run_name(self):
-        self.assertEqual("OpenSSH for Windows", self.result.name)
+        self.assertEqual(self.result.name, "OpenSSH for Windows")
 
     def test_02_normal_run_type(self):
-        self.assertEqual("SSH Client", self.result.type)
+        self.assertEqual(self.result.type, "SSH Client")
 
     def test_03_normal_run_version(self):
-        self.assertEqual("8.0p1", self.result.version)
+        self.assertEqual(self.result.version, "8.0p1")
 
     def test_04_normal_run_details(self):
         self.assertEqual(
-            {"library": "LibreSSL 2.6.5", "hosts number": 2}, self.result.details
+            self.result.details, {"library": "LibreSSL 2.6.5", "hosts number": 2}
         )
 
 
