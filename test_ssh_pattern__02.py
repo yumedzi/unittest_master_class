@@ -1,3 +1,5 @@
+# Polishing of the base example
+
 import unittest
 
 

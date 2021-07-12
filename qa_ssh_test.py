@@ -1,3 +1,5 @@
+# Abstract example of end-to-end test that QA would write
+
 from subprocess import check_output
 
 if __name__ == "__main__":

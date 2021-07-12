@@ -1,7 +1,7 @@
+# Organizing test cases via introducing the base test case class
+
 import unittest
 from unittest.mock import patch, MagicMock
-
-# Change emulate_long_running paramater to non-zero value
 
 from ssh_pattern import SSHClient
 

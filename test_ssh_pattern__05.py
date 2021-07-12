@@ -1,7 +1,7 @@
+# Adding more tests using mocked data
+
 import unittest
 from unittest.mock import patch, MagicMock
-
-# Change emulate_long_running paramater to non-zero value
 
 from ssh_pattern import SSHClient
 from main import Software
