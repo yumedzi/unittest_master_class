@@ -1,10 +1,14 @@
 import re
 import sys
+from dataclasses import dataclass
 
 from main import Software, logger, set_logger
 
 
+@dataclass
 class DockerDesktop(Software):
+    emulated_delay: int = 2
+
     def get_type(self):
         return "Docker Desktop"
 
