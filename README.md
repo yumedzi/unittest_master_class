@@ -27,13 +27,14 @@ I'm going to add unit tests to this repo during or a bit of prior to the actual 
 
 Short summary of step-by-step test examples:
 
-| Test example              | Description                                                    |
-| ------------------------- | -------------------------------------------------------------- |
-| `qa_ssh_test.py`          | Abstract example of end-to-end test that QA would write        |
-| `test_ssh_pattern__01.py` | Basic start example of unit tests                              |
-| `test_ssh_pattern__02.py` | Polishing of the base example                                  |
-| `test_ssh_pattern__03.py` | Emulating long running commands                                |
-| `test_ssh_pattern__04.py` | Adding mocks                                                   |
-| `test_ssh_pattern__05.py` | Adding more tests using mocked data                            |
-| `test_ssh_pattern__06.py` | Optimizing tests                                               |
-| `test_ssh_pattern__07.py` | Organizing test cases via introducing the base test case class |
+| Test example              | Description                                                        |
+| ------------------------- | ------------------------------------------------------------------ |
+| `qa_ssh_test.py`          | Abstract example of end-to-end test that QA would write            |
+| `test_ssh_pattern__01.py` | Basic start example of unit tests                                  |
+| `test_ssh_pattern__02.py` | Polishing of the base example                                      |
+| `test_ssh_pattern__03.py` | Emulating long running commands                                    |
+| `test_ssh_pattern__04.py` | Adding mocks                                                       |
+| `test_ssh_pattern__05.py` | Adding more tests using mocked data                                |
+| `test_ssh_pattern__06.py` | Optimizing tests                                                   |
+| `test_ssh_pattern__07.py` | Organizing test cases via introducing the base test case class     |
+| `test_ssh_pattern__08.py` | Polishing the tests to the maximum level of prettiness and beauty! |
