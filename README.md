@@ -2,6 +2,8 @@
 
 [![Unittest master class](https://github.com/yumedzi/unittest_master_class/actions/workflows/python-package.yml/badge.svg)](https://github.com/yumedzi/unittest_master_class/actions/workflows/python-package.yml)
 
+[The article/training session](http://viktormoyseyenko.pythonanywhere.com/file/slides/v2/Extended_11_Unittest_advanced.slides.html#/CI-pipeline)
+
 > This is a complementary repo for Unittest training I provided. Files and examples can be used freely.
 
 The programs we going to test are "Patterns" - apps that discover and model some existing software on the local machine (where the program runs). These examples designed to be at least a bit similar to [BMC Discovery patterns](https://docs.bmc.com/docs/discovery/112/the-pattern-language-tpl-788121531.html).
