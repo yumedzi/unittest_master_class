@@ -12,10 +12,13 @@ class SSHClient(Software):
     def get_type(self):
         return "SSH Client"
 
-    def get_version(self):
+    def get_version(self) -> str:
         raw_text = self.run_cmd("ssh -V", delay=self.emulated_delay)
 
-        return re.search(r"[_ ](\d[\w\.]*)", raw_text).group(1)
+        m = re.search(r"[_ ](\d[\w\.]*)", raw_text)
+        if m:
+            return m.group(1)
+        return ""
 
     def get_name(self):
         raw_text = self.run_cmd("ssh -V", delay=self.emulated_delay)
