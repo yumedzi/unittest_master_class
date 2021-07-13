@@ -7,3 +7,4 @@ test-output.xml
 .coverage
 htmlcov
 coverage.xml
+results.xml

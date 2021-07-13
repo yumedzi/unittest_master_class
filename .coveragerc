@@ -1,6 +1,7 @@
 [run]
 branch = True
 omit =
+    **/.venv
     **/main.py
     qa_ssh_test.py
     **/test_*.py
