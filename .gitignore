@@ -1,4 +1,9 @@
+# Python
 /.pytest_cache
-/test_ssh_pattern__08.py
 /__pycache__
+
+# pytest, coverage
 test-output.xml
+.coverage
+htmlcov
+coverage.xml

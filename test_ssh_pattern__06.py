@@ -49,15 +49,18 @@ class SSHPatternVersioningTestCase(unittest.TestCase):
     def setUpClass(cls):
         cls.ssh = SSHClient(emulated_delay=5)
 
-        # Mocks
+        # Patchers
         run_cmd_patcher = patch("ssh_pattern.SSHClient.run_cmd")
         get_file_patcher = patch("ssh_pattern.SSHClient.get_file")
 
+        # Mocks
         cls.mock_methods = dict(
             run_cmd=run_cmd_patcher.start(), get_file=get_file_patcher.start()
         )
 
-        cls.addClassCleanup(patch.stopall)
+    @classmethod
+    def tearDownClass(cls):
+        patch.stopall()
 
     def run_test(self, mock_method, mock_value, expected):
         # Mock method is there?
@@ -69,22 +72,29 @@ class SSHPatternVersioningTestCase(unittest.TestCase):
         self.assertEqual(res.version, expected)
 
     def test_11_versioning(self):
-        test_data = "OpenSSH_for_Windows_8.0p5, LibreSSL 2.6.5"
-        expected = "8.0p5"
+        test_data = "OpenSSH_for_Windows_8.0p5, LibreSSL 2.6.5", "8.0p5"
 
-        self.run_test("run_cmd", test_data, expected)
+        self.run_test("run_cmd", *test_data)
 
     def test_12_versioning(self):
-        test_data = "OpenSSH_for_Windows_7.3p05, LibreSSL 2.6.5"
-        expected = "7.3p05"
+        test_data = "OpenSSH_for_Windows_7.3p05, LibreSSL 2.6.5", "7.3p05"
 
-        self.run_test("run_cmd", test_data, expected)
+        self.run_test("run_cmd", *test_data)
 
     def test_13_versioning(self):
-        test_data = "OpenSSH_for_Windows_9, LibreSSL 2.6.5"
-        expected = "9"
+        test_data = "OpenSSH_for_Windows_9, LibreSSL 2.6.5", "9"
 
-        self.run_test("run_cmd", test_data, expected)
+        self.run_test("run_cmd", *test_data)
+
+    def test_14_versioning(self):
+        test_data = "OpenSSH_for_Windows_7.7beta, LibreSSL 2.6.5", "7.7beta"
+
+        self.run_test("run_cmd", *test_data)
+
+    def test_15_versioning(self):
+        test_data = "Command not found", ""
+
+        self.run_test("run_cmd", *test_data)
 
 
 class SSHPatternNameTestCase(unittest.TestCase):
@@ -100,7 +110,9 @@ class SSHPatternNameTestCase(unittest.TestCase):
             run_cmd=run_cmd_patcher.start(), get_file=get_file_patcher.start()
         )
 
-        cls.addClassCleanup(patch.stopall)
+    @classmethod
+    def tearDownClass(cls):
+        patch.stopall()
 
     def run_test(self, mock_method, mock_value, expected):
         # Mock method is there?
@@ -112,22 +124,19 @@ class SSHPatternNameTestCase(unittest.TestCase):
         self.assertEqual(res.name, expected)
 
     def test_21_naming(self):
-        test_data = "OpenSSH_for_Windows_8.0p5, LibreSSL 2.6.5"
-        expected = "OpenSSH for Windows"
+        test_data = "OpenSSH_for_Windows_8.0p5, LibreSSL 2.6.5", "OpenSSH for Windows"
 
-        self.run_test("run_cmd", test_data, expected)
+        self.run_test("run_cmd", *test_data)
 
     def test_22_naming(self):
-        test_data = "OpenSSH 7.3p05, LibreSSL 2.6.5"
-        expected = "OpenSSH"
+        test_data = "OpenSSH 7.3p05, LibreSSL 2.6.5", "OpenSSH"
 
-        self.run_test("run_cmd", test_data, expected)
+        self.run_test("run_cmd", *test_data)
 
     def test_23_naming(self):
-        test_data = "OpenSSH_for_Unix___9, LibreSSL 2.6.5"
-        expected = "OpenSSH for Unix"
+        test_data = "OpenSSH_for_Unix___9, LibreSSL 2.6.5", "OpenSSH for Unix"
 
-        self.run_test("run_cmd", test_data, expected)
+        self.run_test("run_cmd", *test_data)
 
 
 if __name__ == "__main__":

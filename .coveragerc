@@ -1,0 +1,12 @@
+[run]
+branch = True
+omit =
+    **/main.py
+    qa_ssh_test.py
+    **/test_*.py
+
+[report]
+ignore_errors = True
+
+[html]
+directory = htmlcov

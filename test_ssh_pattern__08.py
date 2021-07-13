@@ -1,4 +1,4 @@
-# Organizing test cases via introducing the base test case class
+# Polishing the tests to the maximum level of prettiness and beauty!
 
 import unittest
 from unittest.mock import patch, MagicMock
@@ -74,6 +74,61 @@ class SSHPatternNameTestCase(SSHPatternBaseTestCase):
         test_data = "OpenSSH_for_Unix___9, LibreSSL 2.6.5", "OpenSSH for Unix"
 
         self.run_test(*test_data)
+
+
+class SSHPatternDetailsTestCase(SSHPatternBaseTestCase):
+    test_attribute = "details"
+
+    def run_test(self, *, run_cmd: str = "", get_file: str = "", expected):
+        # Run a test using mocking data
+        self.mock_methods["run_cmd"].return_value = run_cmd
+        self.mock_methods["get_file"].return_value = get_file
+        res = self.ssh.discover()
+        self.assertEqual(getattr(res, self.test_attribute), expected)
+
+    def test_31_details(self):
+        expected = {"library": "LibreSSL 2.6.5", "hosts number": 0}
+
+        self.run_test(
+            run_cmd="OpenSSH_for_Windows_8.0p5, LibreSSL 2.6.5",
+            get_file="",
+            expected=expected,
+        )
+
+    def test_32_details(self):
+        expected = {"library": "LibreSSL 2.6.5", "hosts number": 1}
+
+        get_file_fixture = """Host dev_host
+  HostName 1.2.3.4
+  Port 8922
+  User user
+        """
+
+        self.run_test(
+            run_cmd="OpenSSH_for_Windows_8.0p5, LibreSSL 2.6.5",
+            get_file=get_file_fixture,
+            expected=expected,
+        )
+
+    def test_33_details(self):
+        expected = {"library": "LibreSSL 1.2.3", "hosts number": 2}
+
+        get_file_fixture = """Host dev_host
+  HostName 1.2.3.4
+  Port 8922
+  User user
+
+  Host dev_host_2
+    HostName 1.2.3.4
+    Port 8922
+    User user
+        """
+
+        self.run_test(
+            run_cmd="OpenSSH_for_Windows_8.0p5, LibreSSL 1.2.3",
+            get_file=get_file_fixture,
+            expected=expected,
+        )
 
 
 if __name__ == "__main__":

@@ -4,14 +4,14 @@ import unittest
 from unittest.mock import MagicMock
 
 from ssh_pattern import SSHClient
-from main import Software
+from main import logger
 
 
 class SSHPatternTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print("!!!! Running setUpClass")
-        ssh = SSHClient(emulated_delay=3)
+        ssh = SSHClient(emulated_delay=2)
         cls.result = ssh.discover()
 
     @classmethod
