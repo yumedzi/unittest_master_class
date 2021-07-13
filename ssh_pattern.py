@@ -30,7 +30,11 @@ class SSHClient(Software):
     def get_details(self):
         # Get Library version
         raw_text = self.run_cmd("ssh -V", delay=self.emulated_delay)
-        lib_info = re.search(r", ([\w \.]+)", raw_text).group(1)
+        m = re.search(r", ([\w \.]+)", raw_text)
+        if m:
+            lib_info = re.search(r", ([\w \.]+)", raw_text).group(1)
+        else:
+            lib_info = ""
 
         # Get number of known-hosts
         raw_file = self.get_file(r"~\.ssh\ssh_config", delay=self.emulated_delay)
